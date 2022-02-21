@@ -16,11 +16,18 @@ Managed with [Dotbot](https://github.com/anishathalye/dotbot).
 
 Use the script to setup all configuration
 
-*the program are not installed with the script, you need to install it*
 
 To install the configuration, clone the repo and run the install script:
 
 ```
 git clone https://github.com/marcelinosandroni/dotfiles\
 && ./dotfiles/install
+```
+
+*the programs are not installed with the script, you need to install it, use the package manager in your distribution to install each of them*
+
+example on `arch linux`
+
+```
+pacman -Syu neovim zsh tmux git
 ```
