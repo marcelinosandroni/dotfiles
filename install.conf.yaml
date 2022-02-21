@@ -1,0 +1,20 @@
+- defaults:
+    link:
+        relink: true
+        force: true
+
+- clean:
+    ~/:
+        force: true
+
+- link:
+    ~/.config/nvim: nvim
+    ~/.gitconfig: git/gitconfig
+    ~/.zshrc: zsh/zshrc
+
+- create:
+    - ~/downloads
+    - ~/.vim/undo-history
+    
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
