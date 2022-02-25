@@ -1,65 +1,49 @@
--- verify plugin manager install
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-end
+-- Plugins list
+return require("packer").startup(function(use)
+	local utils = require("utils")
+	local useAndConfig, useAndSetup = utils.makeUse(use)
 
--- auto install when plugin list is changed
-vim.cmd([[
-  augroup packer_user_config
-   autocmd!
-    autocmd BufWritePost */lua/plugins/init.lua source <afile> | PackerSync
-  augroup end
-]])
+	-- plugin manager
+	use("wbthomason/packer.nvim")
 
-local config = function(name)
-  return {
-    config = require('plugins.' .. name)
-  }
-end
+	-- themes
+	use("dracula/vim")
+	use("joshdick/onedark.vim")
+	use("morhetz/gruvbox")
 
-local setup = function(name)
-  return {
-    run = require(name).setup()
-  }
-end
+	-- language servers and extensions
+	use("neovim/nvim-lspconfig")
+	use("williamboman/nvim-lsp-installer")
+	use("ray-x/lsp_signature.nvim")
+	useAndConfig("jose-elias-alvarez/null-ls.nvim", "null-ls", { requires = "nvim-lua/plenary.nvim" })
+	use("j-hui/fidget.nvim", "fidget")
 
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+	-- auto completion
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-nvim-lsp")
+	useAndConfig("L3MON4D3/LuaSnip", "luasnip")
+	use("saadparwaiz1/cmp_luasnip")
+	use("rafamadriz/friendly-snippets")
+	useAndSetup("windwp/nvim-autopairs", "nvim-autopairs")
 
-  -- themes
-  use 'dracula/vim'
-  use 'morhetz/gruvbox'
+	-- syntax
+	use("sheerun/vim-polyglot")
+	useAndConfig("nvim-treesitter/nvim-treesitter", "treesitter", { run = ":TSUpdate" })
 
-  use 'neovim/nvim-lspconfig' -- lsp server
-  use 'hrsh7th/nvim-cmp' -- autocompletion
-  use 'hrsh7th/cmp-nvim-lsp' -- lsp source for cmp
-  use 'saadparwaiz1/cmp_luasnip' -- lua source for cmp
-  use 'L3MON4D3/LuaSnip'
-  use 'ray-x/lsp_signature.nvim'
+	-- commands utilities
+	use("numToStr/Comment.nvim", "Comment")
+	useAndSetup("echasnovski/mini.nvim", "mini.surround")
 
-  use 'jose-elias-alvarez/null-ls.nvim'
+	-- interface
+	useAndConfig("folke/which-key.nvim", "which-key")
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use { 'folke/which-key.nvim', config = function()
-    require('which-key').setup {
-      plugins = {
-        spelling = {
-          enabled = true
-        }
-      }
-    }
-    end
-  }
+	-- file navigation
+	use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
+	useAndSetup("kyazdani42/nvim-tree.lua", "nvim-tree", { requires = "kyazdani42/nvim-web-devicons" })
 
-  use { 'windwp/nvim-autopairs', setup('nvim-autopairs')}
-  use 'ellisonleao/glow.nvim'
-  use { 'j-hui/fidget.nvim', setup('fidget')}
-  use { 'echasnovski/mini.nvim', setup('mini.surround')}
-  use {'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim'}}
+	-- filetypes utilities
+	use("kevinoid/vim-jsonc") -- add comment syntax in json files
+	use("ellisonleao/glow.nvim") -- generate markdown preview
 
-  if packer_bootstrap then
-    require('packer').sync()
-  end
+	--require("plugins.packer")
 end)
