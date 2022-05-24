@@ -1,9 +1,9 @@
 local files = {
-	"edit",
-	"mkdir",
-	"auto",
+   'edit',
+   'mkdir',
+   'auto',
 }
 
 for _, file in ipairs(files) do
-	require("commands." .. file)
+   require('commands.' .. file)
 end

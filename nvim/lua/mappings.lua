@@ -1,4 +1,4 @@
-local map = require('utils')
+local map = require('utils').map
 
 vim.g.mapleader = ' '
 
@@ -11,7 +11,7 @@ map.normal('<leader>l', ':ls<cr>')
 -- telescope file finder
 local telescope = require('telescope.builtin')
 local mapTelescope = function(keys, option)
-  map.normal('<leader>' .. keys, ':Telescope ' .. option .. '<cr>')
+   map.normal('<leader>' .. keys, ':Telescope ' .. option .. '<cr>')
 end
 
 mapTelescope('ff', 'find_files')

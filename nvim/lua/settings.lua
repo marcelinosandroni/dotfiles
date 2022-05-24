@@ -10,23 +10,23 @@ vim.o.autoindent = true
 -- Format
 vim.o.wrap = true
 vim.o.textwidth = 80
-vim.g.formatoptions = "tjcroqlnv"
+vim.g.formatoptions = 'tjcroqlnv'
 
 -- Lines
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.numberwidth = 2
 vim.o.cursorline = true
-vim.o.colorcolumn = "+1"
-vim.o.signcolumn = "yes:2"
+vim.o.colorcolumn = '+1'
+vim.o.signcolumn = 'yes:2'
 vim.o.linebreak = true
 vim.o.breakindent = true
 
 -- interface
 vim.o.termguicolors = true
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = 'yes'
 vim.o.cmdheight = 1
-vim.o.syntax = "on"
+vim.o.syntax = 'on'
 
 -- -- Navigation
 vim.o.scrolloff = 8
@@ -42,4 +42,4 @@ vim.o.backup = false
 vim.o.swapfile = false
 
 vim.o.timeoutlen = 500
-vim.o.shell = "/bin/zsh"
+vim.o.shell = '/bin/zsh'
