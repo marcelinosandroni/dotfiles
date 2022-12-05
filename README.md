@@ -55,7 +55,7 @@ That is a list of features for each program I'm using right now
 
 ### Neovim
 
-See all the plugins in [plugins config](/neovim/lua/plugins/init.lua)
+See all the plugins in [plugins config](/nvim/lua/plugins/init.lua)
 
 * Language Server with auto install
 * Auto completion from LSP, Snips, Copilot and Common / Recent
