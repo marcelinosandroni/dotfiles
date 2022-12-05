@@ -3,3 +3,5 @@
 	name = Marcelino Sandroni
 [init]
 	defaultBranch = main
+[push]
+	default = current

@@ -9,6 +9,7 @@
 
 - link:
     ~/.config/nvim: nvim
+    ~/.config/lvim: lvim
     ~/.gitconfig: git/gitconfig
     ~/.zshrc: zsh/zshrc
 
