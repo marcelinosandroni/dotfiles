@@ -99,11 +99,43 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # Aliases
-alias ll="ls -la"
-alias zshconfig="nvim ~/.zshrc"
+alias ll="exa -la"
+alias zshrc="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias rr="omz reload"
-alias cdv="cd ~/.config/nvim"
-alias cdl="cd ~/.config/nvim/lua"
+alias cdn="cd ~/.config/nvim"
+alias cdnl="cd ~/.config/nvim/lua"
+alias cdl="cd ~/.config/lvim"
 alias nvimplugin="nvim ~/.config/nvim/lua/plugins/init.lua"
 
+# Git
+alias ga="git add --all"
+alias gc="git commit -m"
+alias gcu="git commit -am"
+alias gca="git commit --amend"
+alias gcn="git commit --amend --no-edit --no-verify"
+alias gg="git checkout"
+alias ggb="git checkout -b"
+alias gp="git push"
+alias gl="git pull"
+alias gb="git branch"
+alias gba="git branch -a"
+alias gra="git remote add"
+alias grv="git remote -v"
+alias gl="git log --oneline --decorate --graph --all"
+alias gs="git status"
+
+# Docker
+alias dl="docker ps -a"
+alias drm="docker rm $(docker ps -a -q)"
+alias drmi="docker rmi $(docker images -q)"
+alias dstop="docker stop $(docker ps -a -q)"
+alias dc="docker-compose"
+alias dcb="docker-compose up build"
+alias dcu="docker-compose up"
+alias dcd="docker-compose down"
+
+# Projects
+alias cp="cd ~/projects"
+alias cfc="cd ~/projects/full-cycle"
+alias crs="cd ~/projects/rocketseat"
