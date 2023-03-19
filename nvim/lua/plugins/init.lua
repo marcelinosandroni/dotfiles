@@ -1,64 +1,77 @@
+-- lazy.vim bootstrap
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+--
+--
+--
 -- Plugins list
-return require('packer').startup(function(use)
-   local utils = require('utils')
-   local useAndConfig, useAndSetup = utils.makeUse(use)
+return require('lazy').setup({
+  -- local utils = require('utils')
+  -- local useAndConfig, useAndSetup = utils.makeUse(use)
 
-   -- plugin manager
-   use('wbthomason/packer.nvim')
+  -- themes
+  'dracula/vim',
+  'navarasu/onedark.nvim',
+  'morhetz/gruvbox',
 
-   -- themes
-   use('dracula/vim')
-   use('joshdick/onedark.vim')
-   use('morhetz/gruvbox')
+  -- language servers and extensions
+  'neovim/nvim-lspconfig',
+  'williamboman/nvim-lsp-installer',
+  'ray-x/lsp_signature.nvim',
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function() require('null-ls').setup() end,
+    dependencies = 'nvim-lua/plenary.nvim'
+  },
+  {'j-hui/fidget.nvim', config = function() require('fidget').setup() end},
 
-   -- language servers and extensions
-   use('neovim/nvim-lspconfig')
-   use('williamboman/nvim-lsp-installer')
-   use('ray-x/lsp_signature.nvim')
-   useAndConfig(
-      'jose-elias-alvarez/null-ls.nvim',
-      'null-ls',
-      { requires = 'nvim-lua/plenary.nvim' }
-   )
-   use('j-hui/fidget.nvim', 'fidget')
+  -- auto completion
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  { 'L3MON4D3/LuaSnip', config = function() require('luasnip').setup() end },
+  'saadparwaiz1/cmp_luasnip',
+  'rafamadriz/friendly-snippets',
+  { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup() end },
 
-   -- auto completion
-   use('hrsh7th/nvim-cmp')
-   use('hrsh7th/cmp-nvim-lsp')
-   useAndConfig('L3MON4D3/LuaSnip', 'luasnip')
-   use('saadparwaiz1/cmp_luasnip')
-   use('rafamadriz/friendly-snippets')
-   useAndSetup('windwp/nvim-autopairs', 'nvim-autopairs')
+  -- syntax
+  'sheerun/vim-polyglot',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    -- config = function() require('nvim-treesitter').setup() end,
+    -- cmd = ':TSUpdate'
+  },
 
-   -- syntax
-   use('sheerun/vim-polyglot')
-   useAndConfig(
-      'nvim-treesitter/nvim-treesitter',
-      'treesitter',
-      { run = ':TSUpdate' }
-   )
+  -- commands utilities
+  { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end },
+  { 'echasnovski/mini.nvim', version = false},
 
-   -- commands utilities
-   useAndSetup('numToStr/Comment.nvim', 'Comment')
-   useAndSetup('echasnovski/mini.nvim', 'mini.surround')
+  -- interface
+  { 'folke/which-key.nvim', config = function() require('which-key').setup() end },
 
-   -- interface
-   useAndConfig('folke/which-key.nvim', 'which-key')
+  -- file navigation
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = 'nvim-lua/plenary.nvim'
+  },
+  {
+    'kyazdani42/nvim-tree.lua',
+    config = function() require('nvim-tree').setup() end,
+    dependencies = 'kyazdani42/nvim-web-devicons'
+  },
 
-   -- file navigation
-   use({
-      'nvim-telescope/telescope.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-   })
-   useAndSetup(
-      'kyazdani42/nvim-tree.lua',
-      'nvim-tree',
-      { requires = 'kyazdani42/nvim-web-devicons' }
-   )
+  -- filetypes utilities
+  'kevinoid/vim-jsonc', -- add comment syntax in json file,
+  'ellisonleao/glow.nvim', -- generate markdown previe,
 
-   -- filetypes utilities
-   use('kevinoid/vim-jsonc') -- add comment syntax in json files
-   use('ellisonleao/glow.nvim') -- generate markdown preview
-
-   --require("plugins.packer")
-end)
+  --require("plugins.packer")
+})
